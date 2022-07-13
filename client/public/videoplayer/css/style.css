@@ -90,6 +90,22 @@ body {
   font-size: 16px;
 }
 
+#webxrButton {
+    position: absolute;
+    bottom: 10px;
+    left: 520px;
+    width: 160px;
+    background-color: #5E81AC;
+    /* Blue */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
 #fullscreenButton {
   position: absolute;
   top: 25px;

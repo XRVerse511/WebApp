@@ -1,6 +1,7 @@
 import { VideoPlayer } from "./video-player.js";
 import { registerGamepadEvents, registerKeyboardEvents, registerMouseEvents, sendClickEvent } from "../../js/register-events.js";
 import { getServerConfig } from "../../js/config.js";
+import "../../js/aframe-v1.3.0.js";
 
 setup();
 
@@ -52,11 +53,20 @@ function onClickPlayButton() {
 
   const playerDiv = document.getElementById('player');
 
+  const scene = document.createElement('a-scene');
+  scene.webxr = "requiredFeatures: hit-test,local-floor;\n" +
+    "optionalFeatures: dom-overlay,unbounded;\n" +
+    "overlayElement: #overlay;";
+  playerDiv.appendChild(scene);
+
+  const assets = document.createElement('a-assets');
+  scene.appendChild(assets);
+
   // add video player
   const elementVideo = document.createElement('video');
   elementVideo.id = 'Video';
   elementVideo.style.touchAction = 'none';
-  playerDiv.appendChild(elementVideo);
+  assets.appendChild(elementVideo);
 
   // add video thumbnail
   const elementVideoThumb = document.createElement('video');
