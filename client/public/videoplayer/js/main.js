@@ -53,56 +53,6 @@ function onClickPlayButton() {
 
   const playerDiv = document.getElementById('player');
 
-  const scene = document.createElement('a-scene');
-  scene.webxr = "requiredFeatures: hit-test,local-floor;\n" +
-    "optionalFeatures: dom-overlay,unbounded;\n" +
-    "overlayElement: #overlay;";
-  playerDiv.appendChild(scene);
-
-  const assets = document.createElement('a-assets');
-  scene.appendChild(assets);
-
-  // add video player
-  const elementVideo = document.createElement('video');
-  elementVideo.id = 'Video';
-  elementVideo.style.touchAction = 'none';
-  assets.appendChild(elementVideo);
-
-  // add video thumbnail
-  const elementVideoThumb = document.createElement('video');
-  elementVideoThumb.id = 'VideoThumbnail';
-  elementVideoThumb.style.touchAction = 'none';
-  playerDiv.appendChild(elementVideoThumb);
-
-  setupVideoPlayer([elementVideo, elementVideoThumb]).then(value => videoPlayer = value);
-
-  // add blue button
-  const elementBlueButton = document.createElement('button');
-  elementBlueButton.id = "blueButton";
-  elementBlueButton.innerHTML = "Light on";
-  playerDiv.appendChild(elementBlueButton);
-  elementBlueButton.addEventListener("click", function () {
-    sendClickEvent(videoPlayer, 1);
-  });
-
-  // add green button
-  const elementGreenButton = document.createElement('button');
-  elementGreenButton.id = "greenButton";
-  elementGreenButton.innerHTML = "Light off";
-  playerDiv.appendChild(elementGreenButton);
-  elementGreenButton.addEventListener("click", function () {
-    sendClickEvent(videoPlayer, 2);
-  });
-
-  // add orange button
-  const elementOrangeButton = document.createElement('button');
-  elementOrangeButton.id = "orangeButton";
-  elementOrangeButton.innerHTML = "Play audio";
-  playerDiv.appendChild(elementOrangeButton);
-  elementOrangeButton.addEventListener("click", function () {
-    sendClickEvent(videoPlayer, 3);
-  });
-
   // add fullscreen button
   const elementFullscreenButton = document.createElement('img');
   elementFullscreenButton.id = 'fullscreenButton';
@@ -112,6 +62,7 @@ function onClickPlayButton() {
     if (!document.fullscreenElement || !document.webkitFullscreenElement) {
       if (document.documentElement.requestFullscreen) {
         document.documentElement.requestFullscreen();
+        setupWebXR();
       }
       else if (document.documentElement.webkitRequestFullscreen) {
         document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
@@ -126,6 +77,28 @@ function onClickPlayButton() {
   });
   document.addEventListener('webkitfullscreenchange', onFullscreenChange);
   document.addEventListener('fullscreenchange', onFullscreenChange);
+
+  // add video thumbnail
+  const elementVideoThumb = document.createElement('video');
+  elementVideoThumb.id = 'VideoThumbnail';
+  elementVideoThumb.style.touchAction = 'none';
+  playerDiv.appendChild(elementVideoThumb);
+
+  // add video player
+  const elementVideo = document.createElement('video');
+  elementVideo.id = 'Video';
+  elementVideo.style.touchAction = 'none';
+  playerDiv.appendChild(elementVideo);
+
+  setupVideoPlayer([elementVideo, elementVideoThumb]).then(value => videoPlayer = value);
+
+  function setupWebXR() {
+    const scene = document.createElement('a-scene');
+    scene.webxr = "requiredFeatures: hit-test,local-floor;\n" +
+      "optionalFeatures: dom-overlay,unbounded;\n" +
+      "overlayElement: #overlay;";
+    playerDiv.appendChild(scene);
+  }
 
   function onFullscreenChange() {
     if (document.webkitFullscreenElement || document.fullscreenElement) {

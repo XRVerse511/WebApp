@@ -93,7 +93,7 @@ body {
 #webxrButton {
     position: absolute;
     bottom: 10px;
-    left: 520px;
+    left: 1024px;
     width: 160px;
     background-color: #5E81AC;
     /* Blue */
@@ -108,8 +108,8 @@ body {
 
 #fullscreenButton {
   position: absolute;
-  top: 25px;
-  right: 25px;
+  top: 10px;
+  left: 1024px;
   width: 32px;
   height: 32px;
 }
