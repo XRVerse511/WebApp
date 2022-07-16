@@ -1,5 +1,5 @@
 import * as websocket from "ws";
-import { Server } from 'http';
+import { Server } from "http";
 import * as handler from "./class/websockethandler";
 
 export default class WSSignaling {
@@ -11,8 +11,7 @@ export default class WSSignaling {
     this.wss = new websocket.Server({ server });
     handler.reset(mode);
 
-    this.wss.on('connection', (ws: WebSocket) => {
-
+    this.wss.on("connection", (ws: WebSocket) => {
       handler.add(ws);
 
       ws.onclose = (): void => {
@@ -20,7 +19,6 @@ export default class WSSignaling {
       };
 
       ws.onmessage = (event: MessageEvent): void => {
-
         // type: connect, disconnect JSON Schema
         // connectionId: connect or disconnect connectionId
 

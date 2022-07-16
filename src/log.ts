@@ -4,7 +4,7 @@ export enum LogLevel {
   info,
   log,
   warn,
-  error,
+  error
 }
 
 export function log(level: LogLevel, ...args: any[]): void {
