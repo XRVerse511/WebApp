@@ -48,6 +48,7 @@ export class RenderStreaming {
   public options: Options;
 
   constructor(options: Options) {
+    const router = express.Router();
     const cors = require("cors");
     const corsOptions: cors.CorsOptions = {
       allowedHeaders: [
@@ -59,9 +60,11 @@ export class RenderStreaming {
       ],
       credentials: true,
       methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
-      origin: ['https://bupt.wanl5.top:5000'],
+      origin: ["*"],
       preflightContinue: false,
     };
+    router.use(cors(corsOptions));
+    router.options("*", cors(corsOptions));
     this.options = options;
     this.app = createServer(this.options);
     this.app.use(cors(corsOptions));
