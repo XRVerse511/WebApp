@@ -47,8 +47,12 @@ export class RenderStreaming {
   public options: Options;
 
   constructor(options: Options) {
+    const cors = require("cors");
     this.options = options;
     this.app = createServer(this.options);
+    this.app.use(cors({
+      origin: ['https://bupt.wanl5.top:5000']
+    }));
     if (this.options.secure) {
       this.server = https.createServer({
         key: fs.readFileSync(options.keyfile),
