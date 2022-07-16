@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@jest-mock/express": "^1.4.5",
+    "@types/cors": "^2.8.12",
     "@types/jest": "^28.1.1",
     "@types/morgan": "^1.9.3",
     "@typescript-eslint/eslint-plugin": "^5.27.1",

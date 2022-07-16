@@ -8,6 +8,7 @@ import { createServer } from './server';
 import { AddressInfo } from 'net';
 import WSSignaling from './websocket';
 import Options from './class/options';
+import * as cors from 'cors';
 
 export class RenderStreaming {
   public static run(argv: string[]): RenderStreaming {
@@ -48,11 +49,22 @@ export class RenderStreaming {
 
   constructor(options: Options) {
     const cors = require("cors");
+    const corsOptions: cors.CorsOptions = {
+      allowedHeaders: [
+        'Origin',
+        'X-Requested-With',
+        'Content-Type',
+        'Accept',
+        'X-Access-Token',
+      ],
+      credentials: true,
+      methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
+      origin: ['https://bupt.wanl5.top:5000'],
+      preflightContinue: false,
+    };
     this.options = options;
     this.app = createServer(this.options);
-    this.app.use(cors({
-      origin: ['https://bupt.wanl5.top:5000']
-    }));
+    this.app.use(cors(corsOptions));
     if (this.options.secure) {
       this.server = https.createServer({
         key: fs.readFileSync(options.keyfile),
