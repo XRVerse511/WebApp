@@ -1,5 +1,6 @@
 # exe
 *.exe
+webserver
 
 # idea
 .idea/
