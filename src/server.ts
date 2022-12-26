@@ -19,7 +19,7 @@ export const createServer = (config: Options): express.Application => {
             "X-Access-Token"
         ],
         methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
-        origin: ["https://10.112.79.143:5000", "https://10.112.102.131:5000"]
+        origin: ["https://10.112.79.143:7777", "https://10.112.33.61:7777"]
     };
     const app: express.Application = express();
     resetHandler(config.mode);
